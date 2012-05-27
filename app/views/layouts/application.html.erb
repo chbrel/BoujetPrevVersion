@@ -1,14 +1,141 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Boujet01</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Boujet : Bourse aux jouets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<%= yield %>
+    <!-- Le styles -->
+    <%= stylesheet_link_tag    "bootstrap.css" %>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <%= stylesheet_link_tag    "bootstrap-responsive.css" %>
 
-</body>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <%= javascript_include_tag    "jquery.js" %>
+    <%= javascript_include_tag    "application.js" %>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+	<!-- Navigation Bar -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Boujet</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Accueil</a></li>
+              <li><a href="http://anciens.polytech.unice.fr/">Site des Anciens</a></li>
+            </ul>
+            
+            <% if user_signed_in? -%>
+	            <div class="pull-right btn-group">
+					<div class="btn dropdown-toggle btn-info" data-toggle="dropdown"><i class="icon-user icon-white"></i> <% if current_user.email != nil -%><%= current_user.email %><% else -%><%= current_user.email %><% end -%>&nbsp;&nbsp;
+						<span class="caret"></span>
+					</div>
+					<ul class="dropdown-menu">
+						<li><%= link_to(destroy_user_session_path) do %><i class="icon-eject"></i> Se déconnecter<% end %></li>
+					</ul>
+				</div>
+				<p class="navbar-text pull-right">
+					Connecté en tant que&nbsp;
+	            </p>
+            <% end -%>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <% if flash[:notice] %>
+    <div class="container">
+    	<div class="row">
+			<div class="span8 offset2">
+				<div class="alert alert-success">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= flash[:notice] %>
+				</div>
+			</div>
+		</div>
+	</div>
+    <% end %>
+    <% if flash[:error] %>
+    <div class="container">
+    	<div class="row">
+			<div class="span8 offset2">
+		    	<div class="alert alert-error">
+					<a class="close" data-dismiss="alert" href="#">&times;</a>
+					<%= flash[:error] %>
+				</div>
+			</div>
+		</div>
+	</div>
+    <% end %>
+
+	<!-- Main content -->
+  <% if user_signed_in? -%>
+	<div class="container-fluid">
+		<div class="row-fluid">
+		<%= render "layouts/sidebar" %>
+			<div class="span9">
+    		<%= yield %>
+    		</div><!--/span-->
+    	</div><!--/row-->
+  <% else -%>
+	
+    <div class="container">
+    	<%= yield %>
+    
+  <% end -%>	
+      <hr>
+
+      <footer>
+        <p>&copy; Boujet / 2012<% todayDate = Date.today; if(todayDate.year > 2011) -%> - <%= todayDate.year %><% end -%> Developed by <a href="http://www.christianbrel.fr/">Christian Brel</a></p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- %= javascript_include_tag    "application.js" % -->
+    <%= javascript_include_tag    "bootstrap-alert.js" %>
+    <%= javascript_include_tag    "bootstrap-modal.js" %>
+    <%= javascript_include_tag    "bootstrap-dropdown.js" %>
+    <%= javascript_include_tag    "bootstrap-scrollspy.js" %>
+    <%= javascript_include_tag    "bootstrap-tab.js" %>
+    <%= javascript_include_tag "bootstrap-tooltip.js" %>
+    <%= javascript_include_tag "bootstrap-popover.js" %>
+    <%= javascript_include_tag "bootstrap-button.js" %>
+    <%= javascript_include_tag "bootstrap-collapse.js" %>
+    <%= javascript_include_tag "bootstrap-carousel.js" %>
+    <%= javascript_include_tag "bootstrap-typeahead.js" %>
+	<%= javascript_include_tag "bootstrap-transition.js" %>
+  </body>
 </html>
