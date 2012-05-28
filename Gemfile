@@ -45,6 +45,10 @@ end
 
 group :production do
   gem 'pg'
+  gem 'execjs'
+  gem 'sass-rails', '~> 3.1.4'
+  gem 'compass'
+  gem 'haml'
 end
 
 gem 'devise'
