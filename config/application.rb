@@ -45,7 +45,7 @@ module Boujet01
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    config.assets.precompile += %w(bootstrap.css)
+    config.assets.precompile += ['bootstrap.css', 'bootstrap-responsive.css', 'jquery.js', 'bootstrap-alert.js', 'bootstrap-modal.js', 'bootstrap-dropdown.js', 'bootstrap-scrollspy.js', 'bootstrap-tab.js', 'bootstrap-tooltip.js', 'bootstrap-popover.js', 'bootstrap-button.js', 'bootstrap-collapse.js', 'bootstrap-carousel.js', 'bootstrap-typeahead.js', 'bootstrap-transition.js']
     
   end
 end
